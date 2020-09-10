@@ -124,12 +124,12 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": []
+									"src": "/home/cera/Downloads/tony3.jpeg"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image/validate",
+							"raw": "http://localhost:8000/api/student/195410224/image/validate",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -138,7 +138,7 @@
 							"path": [
 								"api",
 								"student",
-								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"195410224",
 								"image",
 								"validate"
 							]

@@ -107,10 +107,15 @@ def image_profile(request,id):
 # registered in db
 ###
 @api_view(['POST'])
-def validate_image_profile(request,student_id):
+def validate_image_profile(request,nim):
     # get student detail by id
     try: 
-        image_profile = ImageProfile.objects.get(student = student_id)
+        student = Student.objects.get(nim=nim) 
+    except Student.DoesNotExist: 
+        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
+   
+    try: 
+        image_profile = ImageProfile.objects.get(student = student.id)
     except ImageProfile.DoesNotExist: 
         return JsonResponse({'message': 'The Image Profile does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     
