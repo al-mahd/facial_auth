@@ -16,6 +16,7 @@ import face_recognition
 import numpy as np
 import os
 import PIL
+import uuid
 
 # Create your views here.
 
@@ -39,10 +40,10 @@ def student_add(request):
 # one student data
 ###
 @api_view(['GET','PUT','DELETE'])
-def student(request,id):
+def student(request,nim):
     # get student detail by id
     try: 
-        student = Student.objects.get(pk=id) 
+        student = Student.objects.get(nim=nim) 
     except Student.DoesNotExist: 
         return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
@@ -126,12 +127,20 @@ def validate_image_profile(request,nim):
     fs = FileSystemStorage()
     known_image,unknown_image = face_recognition.load_image_file(fs.open(image_profile.filename)), face_recognition.load_image_file(request.FILES['file'])
 
+    response_data = {"validate":True,"message":"both are same person","session_id":""}
+
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
-        return JsonResponse({"validate":False,"message":"one of image is empty"}, status=status.HTTP_200_OK)
+        response_data["validate"] = False
+        response_data["message"] = "one of image is empty"
+        return JsonResponse(response_data, status=status.HTTP_200_OK)
 
     results = face_recognition.compare_faces([known_image_encoding[0]], unknown_encoding[0])
     if not all(results):
-        return JsonResponse({"validate":False,"message":"both are not same person"}, status=status.HTTP_200_OK)
+        response_data["validate"] = False
+        response_data["message"] = "both are not same person"
+        return JsonResponse(response_data, status=status.HTTP_200_OK)
+    
+    response_data["session_id"] = uuid.uuid4()
 
-    return JsonResponse({"validate":True,"message":"both are same person"}, status=status.HTTP_200_OK)
+    return JsonResponse(response_data, status=status.HTTP_200_OK)

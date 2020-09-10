@@ -38,7 +38,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+							"raw": "http://localhost:8000/api/student/195410224",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -47,7 +47,7 @@
 							"path": [
 								"api",
 								"student",
-								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292"
+								"195410224"
 							]
 						}
 					},
@@ -124,7 +124,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/home/cera/Downloads/tony3.jpeg"
+									"src": "/home/cera/Downloads/bruce.jpg"
 								}
 							]
 						},
