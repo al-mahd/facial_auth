@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "74463060-0500-4482-b551-601a17c401e8",
+		"name": "facial_auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "add_student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nim\":\"195410224\",\"name\":\"reno syahputra\",\"status\":0}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail_student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"student",
+								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "image_profile",
+			"item": [
+				{
+					"name": "add_image_profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/cera/Downloads/tony.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"student",
+								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail_image_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"student",
+								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate_image_profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"student",
+								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"image",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
