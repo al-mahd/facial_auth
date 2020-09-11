@@ -124,13 +124,15 @@ def validate_image_profile(request,nim):
     if not form.is_valid():  
         return JsonResponse({'message': 'invalid form'}, status=status.HTTP_400_BAD_REQUEST)
 
-    fs = FileSystemStorage()
-    known_image,unknown_image = face_recognition.load_image_file(fs.open(image_profile.filename)), face_recognition.load_image_file(request.FILES['file'])
-
     response_data = {"validate":True,"message":"both are same person","session_id":""}
+
+    fs = FileSystemStorage()
+
+    known_image,unknown_image = face_recognition.load_image_file(fs.open(image_profile.filename)), face_recognition.load_image_file(request.FILES['file'])
 
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
+        print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
         response_data["validate"] = False
         response_data["message"] = "one of image is empty"
         return JsonResponse(response_data, status=status.HTTP_200_OK)
@@ -142,8 +144,29 @@ def validate_image_profile(request,nim):
         return JsonResponse(response_data, status=status.HTTP_200_OK)
     
     session = Session(student = student)
-    session.save()
 
     response_data["session_id"] =  session.id
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
+
+
+###
+# api to get or delete session
+###
+@api_view(['GET','DELETE'])
+def session(request,id):
+    # get session detail by id
+    try: 
+        session = Session.objects.get(pk=id) 
+    except Session.DoesNotExist: 
+        return JsonResponse({'message': 'The session does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        student = Student.objects.get(pk=session.student.id)
+        return JsonResponse(student.data, status=status.HTTP_200_OK)
+
+    elif request.method == 'DELETE':
+        session.delete()
+        return JsonResponse({'message': 'The session hass been deleted'}, status=status.HTTP_200_OK)
+
+    return JsonResponse({}, status=status.HTTP_200_OK)
