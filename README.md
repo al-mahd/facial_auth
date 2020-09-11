@@ -6,7 +6,7 @@
 
 ```
 
-python manage.py runserver
+python3 manage.py runserver YOUR_IP:8000
 
 ```
 
@@ -38,6 +38,6 @@ create database facial_auth_db;
 
 ```
 
-python manage.py migrate
+python3 manage.py migrate
 
 ```

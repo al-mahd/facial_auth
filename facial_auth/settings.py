@@ -26,7 +26,7 @@ SECRET_KEY = '3=q^*9#25nc&ggvej#g0w0yrb#dzxmanaax&d(ftg6ez)&4!h5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.10']
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'app.middleware.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'facial_auth.urls'

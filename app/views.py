@@ -5,7 +5,7 @@ from rest_framework import status
 from facial_auth import settings
 
 from rest_framework.decorators import api_view
-from app.models import Student,ImageProfile
+from app.models import Student,ImageProfile,Session
 from app.serializers import StudentSerializer,ImageProfileSerializer
 from rest_framework.decorators import api_view
 from django.db.models.functions import Lower
@@ -141,6 +141,9 @@ def validate_image_profile(request,nim):
         response_data["message"] = "both are not same person"
         return JsonResponse(response_data, status=status.HTTP_200_OK)
     
-    response_data["session_id"] = uuid.uuid4()
+    session = Session(student = student)
+    session.save()
+
+    response_data["session_id"] =  session.id
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
