@@ -17,6 +17,7 @@ import numpy as np
 import os
 import PIL
 import uuid
+from .util import handle_download_file
 
 # Create your views here.
 
@@ -71,17 +72,10 @@ def image_profile(request,id):
     # if request method is POST
     # add new image to student
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if not form.is_valid():  
-            return JsonResponse({'message': 'invalid form'}, status=status.HTTP_400_BAD_REQUEST)
+        req = JSONParser().parse(request)
+        uploaded_file_url = req['url']
 
-        tmp_file = request.FILES['file']
-
-        fs = FileSystemStorage()
-        filename = fs.save(tmp_file.name, tmp_file)
-        uploaded_file_url = fs.url(filename)
-
-        req = ImageProfile(student_id=id, filename=filename, url=uploaded_file_url)
+        req = ImageProfile(student_id=id, url=uploaded_file_url)
         req.save()  
 
         return JsonResponse({'message': 'image uploaded'}, status=status.HTTP_201_CREATED)
@@ -127,12 +121,11 @@ def validate_image_profile(request,nim):
     response_data = {"validate":True,"message":"both are same person","session_id":""}
 
     fs = FileSystemStorage()
+    temp_name = handle_download_file(image_profile.url) 
 
-    known_image,unknown_image = face_recognition.load_image_file(fs.open(image_profile.filename)), face_recognition.load_image_file(request.FILES['file'])
-
+    known_image,unknown_image = face_recognition.load_image_file(fs.open(temp_name)), face_recognition.load_image_file(request.FILES['file'])
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
-        print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
         response_data["validate"] = False
         response_data["message"] = "one of image is empty"
         return JsonResponse(response_data, status=status.HTTP_200_OK)
@@ -144,8 +137,10 @@ def validate_image_profile(request,nim):
         return JsonResponse(response_data, status=status.HTTP_200_OK)
     
     session = Session(student = student)
+    # session.save()
 
     response_data["session_id"] =  session.id
+    fs.delete(temp_name)
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
 
