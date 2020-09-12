@@ -27,7 +27,7 @@ SECRET_KEY = '3=q^*9#25nc&ggvej#g0w0yrb#dzxmanaax&d(ftg6ez)&4!h5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['face-auth-renosyah.herokuapp.com']
+ALLOWED_HOSTS = ['face-auth-renosyah.herokuapp.com','localhost']
 
 
 # Application definition
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'app.apps.AppConfig',
     'corsheaders',
-    'mc_tasklist',
 ]
 
 MIDDLEWARE = [

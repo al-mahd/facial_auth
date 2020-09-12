@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 /media
 
-venv
+bin
 *.pyc
 db.sqlite3
