@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'facial_auth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'facial_auth_db',
-        'USER': 'postgres',
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        'NAME': 'db09cau571jfqf',
+        'USER': 'ldiueamwrrxnui',
+        'PASSWORD': 'c233d79c89f8774ea83fa8770d3fa5e9b6085765eda661dd0b2afcd863007d74',
+        'HOST': 'ec2-3-226-231-4.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
