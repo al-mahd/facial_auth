@@ -132,7 +132,7 @@ def validate_image_profile(request,id):
         response_data["message"] = "both are not same person"
         return JsonResponse(response_data, status=status.HTTP_200_OK)
     
-    session = Session(student = student)
+    session = Session(student = Student(id = id))
     # session.save()
 
     response_data["session_id"] =  session.id
