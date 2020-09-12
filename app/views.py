@@ -102,15 +102,9 @@ def image_profile(request,id):
 # registered in db
 ###
 @api_view(['POST'])
-def validate_image_profile(request,nim):
-    # get student detail by id
+def validate_image_profile(request,id):
     try: 
-        student = Student.objects.get(nim=nim) 
-    except Student.DoesNotExist: 
-        return JsonResponse({'message': 'The student does not exist'}, status=status.HTTP_404_NOT_FOUND)
-   
-    try: 
-        image_profile = ImageProfile.objects.get(student = student.id)
+        image_profile = ImageProfile.objects.get(student = id)
     except ImageProfile.DoesNotExist: 
         return JsonResponse({'message': 'The Image Profile does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     
@@ -121,9 +115,12 @@ def validate_image_profile(request,nim):
     response_data = {"validate":True,"message":"both are same person","session_id":""}
 
     fs = FileSystemStorage()
-    temp_name = handle_download_file(image_profile.url) 
+    in_file = request.FILES['file']
+    # fs.save(in_file.name,in_file)
 
-    known_image,unknown_image = face_recognition.load_image_file(fs.open(temp_name)), face_recognition.load_image_file(request.FILES['file'])
+    temp_name = handle_download_file(image_profile.url)
+
+    known_image,unknown_image = face_recognition.load_image_file(fs.open(temp_name)), face_recognition.load_image_file(in_file)
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
         # print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
@@ -141,7 +138,7 @@ def validate_image_profile(request,nim):
     # session.save()
 
     response_data["session_id"] =  session.id
-    fs.delete(temp_name)
+    # fs.delete(temp_name)
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
 

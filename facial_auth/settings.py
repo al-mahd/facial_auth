@@ -27,7 +27,7 @@ SECRET_KEY = '3=q^*9#25nc&ggvej#g0w0yrb#dzxmanaax&d(ftg6ez)&4!h5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['face-auth-renosyah.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['face-auth-renosyah.herokuapp.com','localhost','192.168.1.10']
 
 
 # Application definition
