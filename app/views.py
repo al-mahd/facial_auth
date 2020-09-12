@@ -18,6 +18,7 @@ import os
 import PIL
 import uuid
 from .util import handle_download_file
+import urllib
 
 # Create your views here.
 
@@ -114,13 +115,10 @@ def validate_image_profile(request,id):
 
     response_data = {"validate":True,"message":"both are same person","session_id":""}
 
-    fs = FileSystemStorage()
     in_file = request.FILES['file']
-    # fs.save(in_file.name,in_file)
+    down_img = urllib.request.urlopen(image_profile.url)
 
-    temp_name = handle_download_file(image_profile.url)
-
-    known_image,unknown_image = face_recognition.load_image_file(fs.open(temp_name)), face_recognition.load_image_file(in_file)
+    known_image,unknown_image = face_recognition.load_image_file(down_img), face_recognition.load_image_file(in_file)
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
         # print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
@@ -138,7 +136,6 @@ def validate_image_profile(request,id):
     # session.save()
 
     response_data["session_id"] =  session.id
-    # fs.delete(temp_name)
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
 
