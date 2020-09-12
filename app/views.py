@@ -19,6 +19,7 @@ import PIL
 import uuid
 from .util import handle_download_file
 import urllib
+import gc
 
 # Create your views here.
 
@@ -124,18 +125,21 @@ def validate_image_profile(request,id):
         # print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
         response_data["validate"] = False
         response_data["message"] = "one of image is empty"
+        gc.collect()
         return JsonResponse(response_data, status=status.HTTP_200_OK)
 
     results = face_recognition.compare_faces([known_image_encoding[0]], unknown_encoding[0])
     if not all(results):
         response_data["validate"] = False
         response_data["message"] = "both are not same person"
+        gc.collect()
         return JsonResponse(response_data, status=status.HTTP_200_OK)
     
     session = Session(student = Student(id = id))
     # session.save()
 
     response_data["session_id"] =  session.id
+    gc.collect()
 
     return JsonResponse(response_data, status=status.HTTP_200_OK)
 
