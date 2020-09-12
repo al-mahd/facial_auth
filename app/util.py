@@ -14,4 +14,4 @@ def handle_download_file(URL):
     with urllib.request.urlopen(URL) as url:
         name = fs.save(name, url)
         if name:
-            return name
+            return fs.open(name)

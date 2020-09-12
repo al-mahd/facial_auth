@@ -116,7 +116,7 @@ def validate_image_profile(request,id):
     response_data = {"validate":True,"message":"both are same person","session_id":""}
 
     in_file = request.FILES['file']
-    down_img = urllib.request.urlopen(image_profile.url)
+    down_img = handle_download_file(image_profile.url)
 
     known_image,unknown_image = face_recognition.load_image_file(down_img), face_recognition.load_image_file(in_file)
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
