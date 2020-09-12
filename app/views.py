@@ -126,6 +126,7 @@ def validate_image_profile(request,nim):
     known_image,unknown_image = face_recognition.load_image_file(fs.open(temp_name)), face_recognition.load_image_file(request.FILES['file'])
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
     if len(known_image_encoding) == 0 or len(unknown_encoding) == 0:
+        # print("unknown image : {} ,known image : {} ".format(len(unknown_encoding),len(known_image_encoding)))
         response_data["validate"] = False
         response_data["message"] = "one of image is empty"
         return JsonResponse(response_data, status=status.HTTP_200_OK)

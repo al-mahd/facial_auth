@@ -15,13 +15,16 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"nim\":\"195410224\",\"name\":\"reno syahputra\",\"status\":0}"
+							"raw": "{\"nim\":\"195410222\",\"name\":\"reno syahputra\",\"status\":0}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/student",
+							"raw": "http://192.168.1.10:8000/api/student",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"1",
+								"10"
 							],
 							"port": "8000",
 							"path": [
@@ -65,26 +68,23 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/home/cera/Downloads/tony.jpg"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\"url\":\"https://avatars2.githubusercontent.com/u/22163616?s=460&u=287867c5eb2c415f39687e3cbe0c98ddba05d569&v=4\"}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image",
+							"raw": "http://192.168.1.10:8000/api/student/e4180953-f786-4add-a9f2-59c7d6b2b00f/image",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"1",
+								"10"
 							],
 							"port": "8000",
 							"path": [
 								"api",
 								"student",
-								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"e4180953-f786-4add-a9f2-59c7d6b2b00f",
 								"image"
 							]
 						}
@@ -97,16 +97,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/student/9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292/image",
+							"raw": "http://192.168.1.10:8000/api/student/e4180953-f786-4add-a9f2-59c7d6b2b00f/image",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"1",
+								"10"
 							],
 							"port": "8000",
 							"path": [
 								"api",
 								"student",
-								"9deb2b0f-5ec9-4cbc-a6c3-f1b4bc811292",
+								"e4180953-f786-4add-a9f2-59c7d6b2b00f",
 								"image"
 							]
 						}
@@ -124,21 +127,24 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/home/cera/Downloads/bruce.jpg"
+									"src": "/home/cera/Downloads/me.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8000/api/student/195410224/image/validate",
+							"raw": "http://192.168.1.10:8000/api/student/195410222/image/validate",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"192",
+								"168",
+								"1",
+								"10"
 							],
 							"port": "8000",
 							"path": [
 								"api",
 								"student",
-								"195410224",
+								"195410222",
 								"image",
 								"validate"
 							]
