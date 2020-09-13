@@ -106,7 +106,7 @@ def image_profile(request,id):
 @api_view(['POST'])
 def validate_image_profile(request,id):
     try: 
-        image_profile = ImageProfile.objects.get(student = id)
+        image_profile = ImageProfile.objects.get(student = Student(id = id))
     except ImageProfile.DoesNotExist: 
         return JsonResponse({'message': 'The Image Profile does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     
@@ -118,6 +118,9 @@ def validate_image_profile(request,id):
 
     in_file = request.FILES['file']
     down_img = handle_download_file(image_profile.url)
+
+    # fs = FileSystemStorage()
+    # fs.save(in_file.name, in_file)
 
     known_image,unknown_image = face_recognition.load_image_file(down_img), face_recognition.load_image_file(in_file)
     known_image_encoding,unknown_encoding = face_recognition.face_encodings(known_image), face_recognition.face_encodings(unknown_image)
